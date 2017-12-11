@@ -15,15 +15,36 @@ import { authenticate } from '../../redux/reducers/users';
 
 const mapDispatchToProps = {authenticate};
 
-const validate = form => {
+const validateMobileNumber = form => {
   let errorMessage = '';
   if (form.mobileNumber.includes(' ')){
     errorMessage = 'Mobile Number cannot contain spaces';
+    return errorMessage;
   }
   if (form.mobileNumber === ''){
     errorMessage = 'Mobile Number field must be filled';
+    return errorMessage;
   }
-  return errorMessage;
+  if(form.mobileNumber.length !== 10){
+    errorMessage = 'Invalid Mobile Number'
+    return errorMessage;
+  }
+}
+
+const validateOtpNumber = form => {
+  let errorMessage = '';
+  if (form.otp.includes(' ')){
+    errorMessage = 'OTP cannot contain spaces';
+    return errorMessage;
+  }
+  if (form.otp === ''){
+    errorMessage = 'OTP field must be filled';
+    return errorMessage;
+  }
+  if (form.otp.length !== 6){
+    errorMessage = 'OTP should be 6 digits';
+    return errorMessage;
+  }
 }
 
 class Login extends Component {
@@ -31,12 +52,23 @@ class Login extends Component {
     super(props);
     this.state = {
       mobileNumber: '',
+      otp:'',
       error: '',
     };
   }
 
-  onSubmit(){
-    const error = validate(this.state);
+  onMobileNumberSubmit(){
+    const error = validateMobileNumber(this.state);
+    if (error) {
+      this.setState({ error })
+    }
+    else{
+      this.setState({error:''});
+    }
+  }
+
+  onOtpSubmit(){
+    const error = validateOtpNumber(this.state);
     if (error) {
       this.setState({ error })
     } else {
@@ -75,17 +107,25 @@ class Login extends Component {
           <Button
             block
             style={styles.button}
-            onPress={() => this.onSubmit()}
+            onPress={() => this.onMobileNumberSubmit()}
           >
-            <Text>Log in</Text>
+            <Text>Send OTP</Text>
           </Button>
           </View>
+          <View style={styles.loginBox}>
+            <TextField
+            name="Enter OTP"
+            value={this.state.otp}
+            onChangeText={(text) => this.setState({otp: text})}
+            />
           <Button
-            transparent
-            style={styles.signupBtn}
-            onPress={() => Actions.signup()}>
-            <Text style={styles.signupTxt}>Sign up for an account</Text>
+            block
+            style={styles.button}
+            onPress={() => this.onOtpSubmit()}
+          >
+            <Text>Verify</Text>
           </Button>
+          </View>
         </Content>
       </Container>
     );

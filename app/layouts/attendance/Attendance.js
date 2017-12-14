@@ -7,16 +7,16 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-  class Notifications extends Component{
+  class Attendance extends Component{
       render(){
           return(
               <View style={styles.container}>
-                  <Text>
-                      This is the home page
+                  <Text style={styles.welcome}>
+                      This is the Attendance page
                       </Text>
                       </View>
           );
       }
   }
 
-  export default Notifications;
+  export default Attendance;

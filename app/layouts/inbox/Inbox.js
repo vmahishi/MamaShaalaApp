@@ -6,7 +6,6 @@ import {
   View,
 } from 'react-native';
 import styles from './styles';
-// import BottomTab from '../bottomtab';
 import Tabbar from 'react-native-tabbar-bottom';
 import Attendance from '../attendance';
 import Results from '../results';

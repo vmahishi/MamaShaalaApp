@@ -1,17 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider, connect } from 'react-redux';
-import Router from './app/config/routes.js';
+import Router from './app/config/routes';
 import { Font, AppLoading } from 'expo';
 import store from './app/redux/store';
-// import Tabbar from 'react-native-tabbar-bottom';
-
 
 export default class MamaShaalaApp extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {isReady:false};
+    this.state = {
+      isReady:false,
+    };
   }
 
   async componentWillMount() {
@@ -27,46 +27,9 @@ export default class MamaShaalaApp extends React.Component {
       return <AppLoading />;
     }   
     return (
-      // <View style={styles.container}>
-      //   {this.state.page === "Home" && <Home />}
-      //   {this.state.page === "Profile" && <Profile />}
-      //   {this.state.page === "Attendance" && <Attendance />}
-      //   {this.state.page === "TimeTable" && <TimeTable />}
-      //   {this.state.page === "Results" && <Results />}
-
-
-      //   <Tabbar
-      //     stateFunc={(tab) => {
-      //       this.setState({page: tab.page})
-      //     }}
-      //     activePage={this.state.page}
-      //     tabs={[
-      //       {
-      //         page: "Home",
-      //         icon: "home",
-      //       },
-      //       {
-      //         page: "Profile",
-      //         icon: "person",
-      //       },
-      //       {
-      //         page: "Attendance",
-      //         icon: "hand",
-      //       },
-      //       {
-      //         page: "TimeTable",
-      //         icon: "calendar",
-      //       },
-      //       {
-      //         page: "Results",
-      //         icon: "stats",
-      //       },
-      //     ]}
-      //   />
-      // </View>
-      <Provider store={store}>
-      <Router />
-      </Provider>
+        <Provider store={store}>
+        <Router />
+        </Provider>
     );
   }
 }

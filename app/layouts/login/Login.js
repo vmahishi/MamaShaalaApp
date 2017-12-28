@@ -84,7 +84,7 @@ class Login extends Component {
             mobileNumber: '',
           })
         } else {
-          Actions.notifications();
+          Actions.inbox();
         }
   }
 
